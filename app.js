@@ -51,7 +51,7 @@ const User = mongoose.model("UserInfo");
 
 
 app.post('/register', async (req, res) => {
-    const { fname, lname, email, password } = req.body;
+    const { fname, lname, email, password, userType} = req.body;
 
     const encryptedPassword = await bcrypt.hash(password, 10);
     try {
@@ -64,6 +64,7 @@ app.post('/register', async (req, res) => {
             lname,
             email,
             password: encryptedPassword,
+            userType,
         });
         res.send({ status: "ok" });
     } catch (error) {
@@ -101,7 +102,7 @@ app.post('/userData', async (req, res) => {
         User.findOne({ email: useremail }).then((data)=>{
             res.send({status:"ok", data:data});
         })
-        .catch((eror)=>{
+        .catch((error)=>{
             res.send({status:'error',data:error});
         });
     } catch (error) {

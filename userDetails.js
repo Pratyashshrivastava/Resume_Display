@@ -6,6 +6,7 @@ const userDetailSchrema = new mongoose.Schema(
         lname: String,
         email: {type: String, unique:true},
         password: String,
+        userType: String,
     },
     {
         collection: "userInfo",
